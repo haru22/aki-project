@@ -60,7 +60,7 @@ export default class MessageScreen extends React.Component {
                     <Text style={styles.subtitleText}>{item.text} 5 months ago</Text>
                   </View>
                 }
-                onPress={()=>{this.props.navigation.navigate('Chat', { name: item.name })}}
+                //onPress={()=>{this.props.navigation.navigate('Chat', { name: item.name })}}
               />
             ))
           }
