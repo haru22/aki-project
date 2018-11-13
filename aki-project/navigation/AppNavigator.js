@@ -5,9 +5,10 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import MainTabNavigator from './MainTabNavigator';
 import ChatScreen from '../screens/ChatScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
 
 const ChatStack = createStackNavigator({ Chat: ChatScreen });
-const AuthStack = createStackNavigator({ Login: LoginScreen });
+const AuthStack = createStackNavigator({ Login: LoginScreen, SignUp: SignupScreen });
 
 export default createSwitchNavigator(
 {
@@ -15,10 +16,11 @@ export default createSwitchNavigator(
   Main: MainTabNavigator,
 
   Auth: LoginScreen,
+  SignUp: SignupScreen,
   Chat: ChatScreen,
 },
 {
-  initialRouteName: 'Auth',
+  //initialRouteName: 'Auth',
 }
 );
 

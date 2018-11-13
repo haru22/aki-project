@@ -1,69 +1,107 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
-import firebase from 'firebase';
+import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Image } from 'react-native'
+import { Button, Input } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import firebase from 'firebase'
 
-export default class LoginScreen extends React.Component {
-	state = { email: '', password: '', error: '', loading: false };
-  handleLogin() {
-    this.setState({ error: '', loading: true });
-    const { email, password } = this.state;
+export default class Login extends React.Component {
+  state = { email: '', password: '', errorMessage: null , displayError:false}
+
+  handleLogin = () => {
+    const { email, password } = this.state
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ error: '', loading: false });
-      })
-			.catch((error) => this.setState({ error: error.message }));
-			console.log(this.state.error);
+      .then(() => this.props.navigation.navigate('Main'))
+      .catch(error => this.setState({ errorMessage: error.message }))
   }
+
   render() {
     return (
+	<ImageBackground source={require('../assets/images/login-background2.jpg')} style={{width: '100%', height: '100%'}}>
       <View style={styles.container}>
-     
-        <View style={styles.logoContainer}> 
-        	<Image 
-        		style={styles.logo}
-        		source={require('../assets/images/logo.png')}
-	        	/>
-	        <View style={styles.inputContainer}>
-	        <TextInput 
-	        	style={styles.input}
-						placeholder="username or email"
-						keyboardType="email-address"
-						enablesReturnKeyAutomatically
-						//onEndEditing to check if email entered is valid TO-Do
-						onChangeText={(email) => this.setState({email})}
-	        	/>
-	         <TextInput 
-	         	style={styles.input}
-						 placeholder="password"
-						 enablesReturnKeyAutomatically
-						 secureTextEntry
-						 onSubmitEditing ={this.handleLogin.bind(this)}
-						 onChangeText={(password) => this.setState({password})}
-	        	/>
-	        <TouchableOpacity style={styles.buttonContainer}>
-	        	<Text style={styles.buttonText}>Login</Text>
-	        </TouchableOpacity>
-	         <TouchableOpacity style={styles.buttonContainer}>
-	        	<Text style={styles.buttonText}>Join</Text>
-	        </TouchableOpacity>
-	        </View>
-   		</View>
-
+	  <Image source={require('../assets/images/logo.png')} style={{width: 100, height: 100}} resizeMode='contain' />
+		<Input
+		  placeholder='Email'
+		  placeholderTextColor='#cfd1c0'
+		  autoCapitalize="none"
+		  inputStyle={{color: 'white'}}
+		  leftIcon={
+			<Icon
+			  name='user'
+			  size={24}
+			  color='#cfd1c0'
+			/>}
+		  //errorStyle={(displayError) ? { color: 'red' } : null}
+		  //errorMessage={displayError ? 'Enter a valid email address' : null}
+		  onChangeText={email => this.setState({ email })}
+          value={this.state.email}
+		/>
+		<Input
+		  secureTextEntry
+		  placeholder='Password'
+		  placeholderTextColor='#cfd1c0'
+		  autoCapitalize="none"
+		  inputStyle={{color: 'white'}}
+		  leftIcon={
+			<Icon
+			  name='lock'
+			  size={24}
+			  color='#cfd1c0'
+			/>
+		  }
+		  shake={true}
+		  //errorStyle={(displayError) ? { color: 'red' } : null}
+		  //errorMessage={displayError ? 'Incorrect password' : null}
+		  onChangeText={password => this.setState({ password })}
+		  value={this.state.password}
+		/>
+		{this.state.errorMessage &&
+          <Text style={{ color: '#ff4a66', fontSize: 16, padding: 5}}>
+            {this.state.errorMessage}
+          </Text>}
+		<Button
+			title="Login"
+			titleStyle={{color:"#1e4340" }}
+		  borderRadius={5}
+		  icon= { <Icon
+				name='sign-in'
+				size={20}
+				color= 'grey'
+				type='fontawesome'
+		  />
+		  }
+		  iconRight
+		  shake={true}
+		  buttonStyle={styles.button}
+		  onPress={this.handleLogin} 
+		/>
+		<Text style={{color:'white'}}>Don't have an account?</Text>
+        <Button
+          title="Sign Up"
+		  onPress={() => this.props.navigation.navigate('SignUp')}
+		  buttonStyle={styles.signupButton}
+		  titleStyle={{fontSize:20, fontWeight:'bold' }}
+        />
       </View>
-    );
+	</ImageBackground>
+    )
   }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		//alignItems: 'center',
-		justifyContent: 'center',
-		flex: 1,
-	},
-	text: {
-		color: 'red',
-	}
+  container: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  button: {
+	  width: 250,
+	  backgroundColor: '#66e2d6',
+  },
+  signupButton: {
+	borderWidth: 0,
+	backgroundColor: null
+  }
+  
 })
