@@ -2,11 +2,24 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import * as firebase from 'firebase';
+import { FIREBASE_API_KEY, AUTH_DOMAIN, DATABASE_URL, FIREBASE_PROJECT_ID, MESSAGE_ID } from 'react-native-dotenv';
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
+  componentWillMount() {
+    firebase.initializeApp({
+      apiKey: FIREBASE_API_KEY,
+      authDomain: AUTH_DOMAIN,
+      databaseURL: DATABASE_URL,
+      projectId: FIREBASE_PROJECT_ID,
+      messagingSenderId: MESSAGE_ID
+    });
+  }
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -60,3 +73,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
