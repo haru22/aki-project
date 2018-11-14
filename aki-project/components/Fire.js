@@ -21,8 +21,8 @@ class Fire {
   };
 
   get uid() {
-    //return (auth().currentUser || {}).uid;
-    return 'kEWeHshCc0UG1Na34ahG6py89Fd2'
+    return (auth().currentUser || {}).uid;
+    //return 'kEWeHshCc0UG1Na34ahG6py89Fd2'
   }
 
   get ref() {

@@ -17,10 +17,10 @@ export default createSwitchNavigator(
 
   Auth: LoginScreen,
   SignUp: SignupScreen,
-  Chat: ChatScreen,
+  Chat: ChatStack,
 },
 {
-  //initialRouteName: 'Auth',
+  initialRouteName: 'Auth',
 }
 );
 

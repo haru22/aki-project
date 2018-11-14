@@ -28,6 +28,7 @@ export default class ChatScreen extends React.Component {
           onSend={Fire.shared.send}
           user={this.user}
           //user='vMovSEJrBeSqPGl9rFo82wTnGwL2'
+          showUserAvatar
         />
     );
   }

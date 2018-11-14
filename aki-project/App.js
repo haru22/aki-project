@@ -1,9 +1,18 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, YellowBox } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import * as firebase from 'firebase';
 import { FIREBASE_API_KEY, AUTH_DOMAIN, DATABASE_URL, FIREBASE_PROJECT_ID, MESSAGE_ID } from 'react-native-dotenv';
+import _ from 'lodash';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
+const _console = _.clone(console);
+console.warn = message => {
+  if (message.indexOf('Setting a timer') <= -1) {
+    _console.warn(message);
+  }
+};
 
 export default class App extends React.Component {
   state = {
