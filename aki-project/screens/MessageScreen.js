@@ -43,7 +43,6 @@ export default class MessageScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {console.log("it gets here then crashes")}
         {
           this.state.UsersList.map((item) => (
             <ListItem

@@ -7,7 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View,
+  FlatList,
+  StatusBar,
+  ImageBackground,
+  TouchableHighlight,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -17,35 +22,42 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          backgroundColor: "#CED0CE",
+        }}
+      />
+    );
+  };
+
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            {/* <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            /> */}
-          </View>
-
-          <View style={styles.getStartedContainer}>
-
-          </View>
-
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
+      <ImageBackground source={require('../assets/images/home-background.jpg')} style={{width: '100%', height: '100%'}}>
+        <StatusBar
+          barStyle="light-content"
+        />
+        <View style={styles.container}>
+          <FlatList
+            data={[{title: 'My Groups', icon: 'sitemap',key:'item1'},{title: 'Browse Groups', icon: 'search',key:'item2'},{title: 'Events', icon: 'podcast', key:'item3'},{title: 'Invite Friends', icon: 'plus-square-o', key:'item4'}]}
+            ItemSeparatorComponent={this.renderSeparator}
+            columnWrapperStyle={{marginBottom:0}}
+            numColumns={2}
+            renderItem={({item, separators, index}) => (
+              <View style={[ styles.gridItem, index%2==0 ? { borderEndWidth: 1, borderEndColor:'#CED0CE' } : { marginLeft: 0 } ]}>
+                <Icon
+                  name={item.icon}
+                  size={24}
+                  color='#66e2d6'
+                />
+                <Text style={{color:'white'}}>{item.title}</Text>
+              </View>
+            )}
+          /> 
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 
@@ -54,33 +66,22 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'space-evenly',
+    marginTop: 20,
   },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: 'center',  
   },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+  gridItem: {
+    flex: 1,  
+    height: 130, 
+    justifyContent:'space-evenly',
+    marginVertical: 20,
+    alignItems: "center" ,
   },
   homeScreenFilename: {
     marginVertical: 7,

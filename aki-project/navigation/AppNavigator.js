@@ -20,7 +20,7 @@ export default createSwitchNavigator(
   Chat: ChatStack,
 },
 {
-  initialRouteName: 'Auth',
+  //initialRouteName: 'Auth',
 }
 );
 
