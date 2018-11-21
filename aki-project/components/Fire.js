@@ -20,6 +20,8 @@ class Fire {
     }
   };
 
+  // TODO:
+  // - implement one on one chat
   get uid() {
     return (auth().currentUser || {}).uid;
     //return 'kEWeHshCc0UG1Na34ahG6py89Fd2'

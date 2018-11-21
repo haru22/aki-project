@@ -10,17 +10,24 @@ export default class ChatScreen extends React.Component {
       messages: [],
     }
   }
-    static navigationOptions = ({ navigation }) => ({
-        title: navigation.getParam('name', 'chats'),
-    });
+  static navigationOptions = ({ navigation }) => ({
+      title: navigation.getParam('name', 'chats'),
+  });
 
-    get user() {
-        return {
-          name: "Diane Test",
-          //name: this.props.navigation.state.params.name,
-          _id: Fire.shared.uid,
-        };
-    }
+  get user() {
+      return {
+        name: "Diane Test",
+        //name: this.props.navigation.state.params.name,
+        _id: Fire.shared.uid,
+      };
+  }
+
+  // TODO:
+  // - fix timestamp 
+  // - incorporate green theme in the UI and the dark background
+  // - make text area move up with keyboard (look up on react-native-gifted-chat repo)
+  // - add some options to the text area (look up actions for react-native-gifted-chat)
+
   render() {
     return (
         <GiftedChat

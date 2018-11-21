@@ -14,7 +14,11 @@ export default class Login extends React.Component {
       .signInWithEmailAndPassword(email, password)
       .then(() => this.props.navigation.navigate('Main'))
       .catch(error => this.setState({ errorMessage: error.message }))
-  }
+	}
+	
+	// TODO:
+	// - add a route for each menu item (could be a pop up or whatnot but have something happen when item pressed)
+	// - push items down and have something on top like welcome? and add more menu items if need be(ask Haru)
 
   render() {
     return (

@@ -27,6 +27,10 @@ export default class MessageScreen extends React.Component {
     title: 'Inbox',
   };
 
+  // TODO:
+  // - work on UI, list should not start that high, add background image and add the green theme
+  // - have route successfully pass down user so name and avatar shows on top of chat screen
+  // - make last message show as description with time on the far right
   componentDidMount() {
     console.log("component mount is happening yay!")
     var query = database().ref('users').orderByChild('organization').equalTo("org1");

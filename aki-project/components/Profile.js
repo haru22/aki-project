@@ -16,6 +16,8 @@ export default class Profile extends React.Component {
     return <SectionHeader title={section.title} />;
   };
     
+  // TODO
+  // -update view to match new dark and green theme
   render() {
     const sections = [
         { data: [{ value: "Diablo Valley College" }], title: 'School Name' },
