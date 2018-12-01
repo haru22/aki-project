@@ -8,16 +8,16 @@ export default class MessageScreen extends React.Component {
     super(props)
     this.state = {
         list: [
-          {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            text: 'Vice President'
-          },
-          {
-            name: 'Chris Jackson',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            text: 'Vice Chairman'
-          },
+          // {
+          //   name: 'Amy Farha',
+          //   avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+          //   text: 'Vice President'
+          // },
+          // {
+          //   name: 'Chris Jackson',
+          //   avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+          //   text: 'Vice Chairman'
+          // },
         ]
     }
   }
@@ -60,7 +60,7 @@ export default class MessageScreen extends React.Component {
                     <Text style={styles.subtitleText}>{item.text} 5 months ago</Text>
                   </View>
                 }
-                //onPress={()=>{this.props.navigation.navigate('Chat', { name: item.name })}}
+                onPress={()=>{this.props.navigation.navigate('Chat', {name:"name"})}}
               />
             ))
           }
